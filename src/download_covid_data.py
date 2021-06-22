@@ -50,12 +50,14 @@ def validate_argument(argument):
     if argument in tuple_iso_countries:
         return argument
     else:
-        return 'Not valid country'
+        return ''
 
 # Check if there is a file with info in case of true there is no need to call the API
 # With this base we can play a little bit more with adding timestamps to refresh files or more options to the behaviour of the calls
 def retrieve_country_info(argument):
     country = validate_argument(argument)
+    if not country:
+        return ''
     country_file = check_cache_call(country)
     if not country_file:
         country_file = call_to_api(country)

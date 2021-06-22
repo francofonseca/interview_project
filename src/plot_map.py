@@ -6,9 +6,13 @@ import pandas as pd
 # For now the function scope is only with COVID info 
 
 def plotly_map_csv(path_to_csv):
+    # Retrieve with pandas the csv file
     mex_states=pd.read_csv(path_to_csv)
+    
+    # Configure map
     fig = px.scatter_mapbox(mex_states, lat="lat", lon="long", hover_name="state", hover_data=["confirmed", "recovered", "deaths", "updated"],
                         color_discrete_sequence=["red"], zoom=5, size="confirmed")
     fig.update_layout(mapbox_style="stamen-terrain")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    # Show it
     fig.show()
